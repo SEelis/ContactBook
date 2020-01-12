@@ -24,6 +24,7 @@ bool Contact::getRelative() {
 	return relative;
 }
 
+//prints contact formatted for columns
 void Contact::printContact() {
 	cout << left << setw(MAX_NAME_LENGTH + 2) << name << setw(MAX_EMAIL_LENGTH + 2) << email << setw(MAX_PHONE_NUMBER_LENGTH + 2) << number << setw(MAX_CITY_LENGTH + 2) << city;
 	if (relative) {

@@ -15,13 +15,14 @@ void ContactBook::deleteContact(int index) {
 	contacts.erase(contacts.begin() + index);
 }
 
-
+//Prints all contacts formamted for columns
 void ContactBook::printContacts() {
 	for (auto i = contacts.begin(); i != contacts.end(); ++i) {
 		i->printContact();
 	}
 }
 
+//Finds all relatives and prints them formatted for columns
 void ContactBook::printRelatives() {
 	for (auto i = contacts.begin(); i != contacts.end(); ++i) {
 		if (i->getRelative()) {
@@ -30,6 +31,7 @@ void ContactBook::printRelatives() {
 	}
 }
 
+//Finds all non relatives and prints them formatted for columns
 void ContactBook::printNonRelatives() {
 	for (auto i = contacts.begin(); i != contacts.end(); ++i) {
 		if (!i->getRelative()) {
@@ -38,6 +40,7 @@ void ContactBook::printNonRelatives() {
 	}
 }
 
+//Prints formatted for columns with index
 void ContactBook::printWithIndex() {
 	int index = 0;
 	for (auto i = contacts.begin(); i != contacts.end(); ++i) {
@@ -50,6 +53,7 @@ int ContactBook::getSize() {
 	return contacts.size();
 }
 
+//Prints all contacts from a city formatted for columns
 void ContactBook::printListFromCity(string city) {
 	for (auto i = contacts.begin(); i != contacts.end(); ++i) {
 		if (city.compare(i->getCity()) == 0) {
@@ -57,6 +61,7 @@ void ContactBook::printListFromCity(string city) {
 		}
 	}
 }
+
 
 void ContactBook::saveContacts(string filename) {
 	ofstream savefile;
@@ -71,6 +76,7 @@ void ContactBook::saveContacts(string filename) {
 		cout << "Unable to open file";
 	}
 }
+
 
 void ContactBook::loadContacts(string filename) {
 	ifstream readfile;

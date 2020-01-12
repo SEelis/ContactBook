@@ -9,10 +9,10 @@
 Ui::Ui() {
 }
 
+//menu for when program starts and to which we always return
 void Ui::mainMenu() {
 	int choice = -1;
 	while (true) {
-		cout << "Select action to take by entering a integer" << endl;
 		cout << "(1) to clear all records." << endl;
 		cout << "(2) to save on disk" << endl;
 		cout << "(3) to load from disk" << endl;
@@ -22,6 +22,7 @@ void Ui::mainMenu() {
 		cout << "(7) to print all contacts: " << endl;
 
 		choice = getIntput(7, "Please enter integer for your action", NOCANCEL);
+		cout << endl;
 
 		if (choice == 1) {
 			contactBook.clearContacts();
@@ -39,21 +40,16 @@ void Ui::mainMenu() {
 			removeContact();
 		}
 		else if (choice == 6) {
-			string city;
-			cout << "Enter the city name for the contacts you'd like to search: ";
-			cin >> city;
-			printLegend();
-			contactBook.printListFromCity(city);
+			searchCity();
 		}
 		else if (choice == 7) {
-			printLegend();
-			contactBook.printRelatives();
-			contactBook.printNonRelatives();
+			printAllContacts();
 		}
 		cout << endl << endl;
 	}
 }
 
+//Takes care of adding new contacts
 void Ui::addContact() {
 	string message = "Cancelling adding a new contact";
 	string name = inputName();
@@ -84,6 +80,7 @@ void Ui::addContact() {
 	contactBook.addContact(name, email, number, city, brelative);
 }
 
+//checks if string is "cancel", also posts message passed to function if cancelled
 bool Ui::checkCancel(string s, string message) {
 	if (s.compare("cancel") == 0) {
 		cout << message << endl;
@@ -92,6 +89,7 @@ bool Ui::checkCancel(string s, string message) {
 	return false;
 }
 
+//Gets integer input between 1 and the wanted upper limit, option to include 0 for cancelling
 int Ui::getIntput(int highIndex, string message, bool cancel) {
 	int choice;
 	cout << message << " (1 - " << highIndex << ")";
@@ -110,7 +108,7 @@ int Ui::getIntput(int highIndex, string message, bool cancel) {
 				cout << "1";
 			}
 
-			cout << " and " << highIndex << endl;
+			cout << " and " << highIndex << ": ";
 		}
 		else {
 			return choice;
@@ -120,6 +118,7 @@ int Ui::getIntput(int highIndex, string message, bool cancel) {
 	}
 }
 
+//Getting name for adding contact
 string Ui::inputName() {
 	string input;
 	while (true) {
@@ -139,6 +138,7 @@ string Ui::inputName() {
 	return NULL;
 }
 
+//Getting email for adding contact
 string Ui::inputEmail() {
 	string input;
 	while (true) {
@@ -157,6 +157,7 @@ string Ui::inputEmail() {
 	return NULL;
 }
 
+//Getting phone number for adding contact
 string Ui::inputNumber() {
 	string input;
 	while (true) {
@@ -175,6 +176,7 @@ string Ui::inputNumber() {
 	return NULL;
 }
 
+//Getting city name for adding contact
 string Ui::inputCity() {
 	string input;
 	while (true) {
@@ -193,6 +195,7 @@ string Ui::inputCity() {
 	return NULL;
 }
 
+//Getting whether contact to be added is relative or not
 int Ui::inputRelative() {
 	string input;
 	while (true) {
@@ -213,14 +216,17 @@ int Ui::inputRelative() {
 	}
 }
 
+//prints legends formatted for columns
 void Ui::printLegend() {
 	cout << left << setw(MAX_NAME_LENGTH + 2) << "Name" << setw(MAX_EMAIL_LENGTH + 2) << "Email" << setw(MAX_PHONE_NUMBER_LENGTH + 2) << "Phone number" << setw(MAX_CITY_LENGTH + 2) << "City" << "Relative" << endl;
 }
 
+//prints legends formatted for columns with column for index
 void Ui::printLegendWithIndex() {
 	cout << left << setw(INDEX_WIDTH) << "Index" << setw(MAX_NAME_LENGTH + 2) << "Name" << setw(MAX_EMAIL_LENGTH + 2) << "Email" << setw(MAX_PHONE_NUMBER_LENGTH + 2) << "Phone number" << setw(MAX_CITY_LENGTH + 2) << "City" << "Relative" << endl;
 }
 
+//Either saves or loads contact based on boolean. 
 void Ui::saveLoadContacts(bool saveOrLoad) {
 	string filename;
 	cout << "Please enter file name, enter \"cancel\" to cancel: ";
@@ -237,6 +243,7 @@ void Ui::saveLoadContacts(bool saveOrLoad) {
 	}
 }
 
+//Handles input for removing contacts
 void Ui::removeContact() {
 	int size = contactBook.getSize();
 	int choice;
@@ -254,4 +261,23 @@ void Ui::removeContact() {
 	else {
 		cout << "No contacts to delete." << endl;
 	}
+}
+
+//Handles input for searching contacts based on city
+void Ui::searchCity() {
+	string city;
+	cout << "Enter the city name for the contacts you'd like to search, enter \"cancel\" to cancel: ";
+	cin >> city;
+	if (checkCancel(city, "Cancelling search.")) {
+		return;
+	}
+	printLegend();
+	contactBook.printListFromCity(city);
+}
+
+//prints all contacts formatted for columns, relatives first
+void Ui::printAllContacts() {
+	printLegend();
+	contactBook.printRelatives();
+	contactBook.printNonRelatives();
 }

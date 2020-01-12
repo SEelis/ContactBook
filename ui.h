@@ -27,4 +27,6 @@ private:
 	void printLegendWithIndex();
 	void saveLoadContacts(bool saveOrLoad);
 	void removeContact();
+	void searchCity();
+	void printAllContacts();
 };
