@@ -17,8 +17,9 @@ public:
 	string getCity();
 	bool getRelative();
 	void printContact();
-	friend ostream& operator<<(ostream& os, const Contact& c);
+	friend ostream &operator << (ostream &os, const Contact &c);
 	friend istream &operator >> (istream  &is, Contact &c);
+	friend bool operator < (const Contact &c1, const Contact &c2);
 
 private:
 	string name;

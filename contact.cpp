@@ -42,3 +42,19 @@ istream &operator >> (istream  &is, Contact &c) {
 	is >> c.name >> c.email >> c.number >> c.city >> c.relative;
 	return is;
 }
+
+bool operator < (const Contact &c1, const Contact &c2) {
+	if (c1.name != c2.name) {
+		return c1.name < c2.name;
+	} else if (c1.relative != c2.relative) {
+		return c1.relative;
+	} else if (c1.city != c2.city) {
+		return c1.city < c2.city;
+	} else if (c1.email != c2.email) {
+		return c1.email < c2.email;
+	} else if (c1.number != c2.number) {
+		return c1.number < c2.number;
+	} else {
+		return false;
+	}
+}

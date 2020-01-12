@@ -71,8 +71,7 @@ void ContactBook::saveContacts(string filename) {
 			savefile << *i << endl;
 		}
 		savefile.close();
-	}
-	else {
+	} else {
 		cout << "Unable to open file";
 	}
 }
@@ -88,8 +87,11 @@ void ContactBook::loadContacts(string filename) {
 			contacts.push_back(c);
 		}
 		readfile.close();
-	}
-	else {
+	} else {
 		cout << "Unable to open file";
 	}
+}
+
+void ContactBook::orderAlphabetically() {
+	sort(contacts.begin(), contacts.end());
 }

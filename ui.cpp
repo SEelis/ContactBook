@@ -19,31 +19,28 @@ void Ui::mainMenu() {
 		cout << "(4) to add a new contact" << endl;
 		cout << "(5) to remove a contact" << endl;
 		cout << "(6) to print every contact from given city" << endl;
-		cout << "(7) to print all contacts: " << endl;
+		cout << "(7) to print all contacts (relatives first)" << endl;
+		cout << "(8) to reorder the contacts alphabetically and to print them: " << endl;
 
-		choice = getIntput(7, "Please enter integer for your action", NOCANCEL);
+		choice = getIntput(8, "Please enter integer for your action", NOCANCEL);
 		cout << endl;
 
 		if (choice == 1) {
 			contactBook.clearContacts();
-		}
-		else if (choice == 2) {
+		} else if (choice == 2) {
 			saveLoadContacts(SAVE);
-		}
-		else if (choice == 3) {
+		} else if (choice == 3) {
 			saveLoadContacts(LOAD);
-		}
-		else if (choice == 4) {
+		} else if (choice == 4) {
 			addContact();
-		}
-		else if (choice == 5) {
+		} else if (choice == 5) {
 			removeContact();
-		}
-		else if (choice == 6) {
+		} else if (choice == 6) {
 			searchCity();
-		}
-		else if (choice == 7) {
+		} else if (choice == 7) {
 			printAllContacts();
+		} else if (choice == 8) {
+			orderAndPrint();
 		}
 		cout << endl << endl;
 	}
@@ -73,8 +70,7 @@ void Ui::addContact() {
 	if (relative == -1) {
 		cout << message << endl;
 		return;
-	}
-	else if (relative == 0) {
+	} else if (relative == 0) {
 		brelative = false;
 	}
 	contactBook.addContact(name, email, number, city, brelative);
@@ -103,14 +99,12 @@ int Ui::getIntput(int highIndex, string message, bool cancel) {
 			cout << "Please enter an integer between ";
 			if (cancel) {
 				cout << "0";
-			}
-			else {
+			} else {
 				cout << "1";
 			}
 
 			cout << " and " << highIndex << ": ";
-		}
-		else {
+		} else {
 			return choice;
 		}
 		cin.clear();
@@ -149,8 +143,7 @@ string Ui::inputEmail() {
 		}
 		if (input.length() <= MAX_EMAIL_LENGTH) {
 			return input;
-		}
-		else {
+		} else {
 			cout << "Please enter email with under " << MAX_EMAIL_LENGTH << " characters\n";
 		}
 	}
@@ -168,8 +161,7 @@ string Ui::inputNumber() {
 		}
 		if (input.length() <= MAX_PHONE_NUMBER_LENGTH) {
 			return input;
-		}
-		else {
+		} else {
 			cout << "Please enter phone number with under " << MAX_PHONE_NUMBER_LENGTH << " characters\n";
 		}
 	}
@@ -187,8 +179,7 @@ string Ui::inputCity() {
 		}
 		if (input.length() <= MAX_CITY_LENGTH) {
 			return input;
-		}
-		else {
+		} else {
 			cout << "Please enter city name with under " << MAX_CITY_LENGTH << " characters\n";
 		}
 	}
@@ -203,14 +194,11 @@ int Ui::inputRelative() {
 		cin >> input;
 		if (input.compare("Y") == 0) {
 			return 1;
-		}
-		else if (input.compare("N") == 0) {
+		} else if (input.compare("N") == 0) {
 			return 0;
-		}
-		else if (input.compare("cancel") == 0) {
+		} else if (input.compare("cancel") == 0) {
 			return -1;
-		}
-		else {
+		} else {
 			cout << "Please enter Y for relative or N for not relative. \n";
 		}
 	}
@@ -237,8 +225,7 @@ void Ui::saveLoadContacts(bool saveOrLoad) {
 	}
 	if (saveOrLoad) {
 		contactBook.saveContacts(filename);
-	}
-	else {
+	} else {
 		contactBook.loadContacts(filename);
 	}
 }
@@ -253,12 +240,10 @@ void Ui::removeContact() {
 		choice = getIntput(size, "Please enter index of the contact to remove", CANCEL);
 		if (choice == 0) {
 			cout << "Cancelling deleting a contact" << endl;
-		}
-		else {
+		} else {
 			contactBook.deleteContact(choice - 1);
 		}
-	}
-	else {
+	} else {
 		cout << "No contacts to delete." << endl;
 	}
 }
@@ -280,4 +265,11 @@ void Ui::printAllContacts() {
 	printLegend();
 	contactBook.printRelatives();
 	contactBook.printNonRelatives();
+}
+
+//orders contacts alphabetically and prints them
+void Ui::orderAndPrint() {
+	contactBook.orderAlphabetically();
+	printLegend();
+	contactBook.printContacts();
 }

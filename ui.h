@@ -29,4 +29,5 @@ private:
 	void removeContact();
 	void searchCity();
 	void printAllContacts();
+	void orderAndPrint();
 };

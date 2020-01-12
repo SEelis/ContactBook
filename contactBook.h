@@ -6,8 +6,7 @@
 #include <fstream>
 #include <vector>
 #include "Contact.h"
-#include <sstream>
-#include <locale>
+#include <algorithm>
 
 #define INDEX_WIDTH 7
 
@@ -27,6 +26,7 @@ public:
 	void printNonRelatives();
 	void printWithIndex();
 	int getSize();
+	void orderAlphabetically();
 
 private:
 	vector<Contact> contacts;
