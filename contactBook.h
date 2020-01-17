@@ -18,8 +18,8 @@ public:
 	void addContact(string name, string email, string number, string city, bool relative);
 	void deleteContact(int index);
 	void clearContacts();
-	void saveContacts(string filename);
-	void loadContacts(string filename);
+	bool saveContacts(string filename);
+	bool loadContacts(string filename);
 	void printListFromCity(string city);
 	void printContacts();
 	void printRelatives();

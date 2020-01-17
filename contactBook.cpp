@@ -63,7 +63,7 @@ void ContactBook::printListFromCity(string city) {
 }
 
 
-void ContactBook::saveContacts(string filename) {
+bool ContactBook::saveContacts(string filename) {
 	ofstream savefile;
 	savefile.open(filename, ios::out | ios::trunc);
 	if (savefile.is_open()) {
@@ -71,13 +71,14 @@ void ContactBook::saveContacts(string filename) {
 			savefile << *i << endl;
 		}
 		savefile.close();
+		return true;
 	} else {
-		cout << "Unable to open file";
+		return false;
 	}
 }
 
 
-void ContactBook::loadContacts(string filename) {
+bool ContactBook::loadContacts(string filename) {
 	ifstream readfile;
 	readfile.open(filename, ios::in);
 	Contact c;
@@ -87,8 +88,9 @@ void ContactBook::loadContacts(string filename) {
 			contacts.push_back(c);
 		}
 		readfile.close();
+		return true;
 	} else {
-		cout << "Unable to open file";
+		return false;
 	}
 }
 

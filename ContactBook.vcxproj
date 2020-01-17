@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{32E4AC55-BC58-4797-92B1-1212D07A64D7}</ProjectGuid>
+    <ProjectGuid>{1D110522-D50D-4205-916B-39F9B9E75325}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ContactBook</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>

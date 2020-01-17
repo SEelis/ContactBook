@@ -223,10 +223,17 @@ void Ui::saveLoadContacts(bool saveOrLoad) {
 	if (checkCancel(filename, "Cancelling " + s)) {
 		return;
 	}
+	bool success = false;
 	if (saveOrLoad) {
-		contactBook.saveContacts(filename);
+		success = contactBook.saveContacts(filename);
 	} else {
-		contactBook.loadContacts(filename);
+		success = contactBook.loadContacts(filename);
+	}
+
+	if (success) {
+		cout << "File has been opened successfully" << endl;;
+	} else {
+		cout << "Unable to open the file." << endl;
 	}
 }
 
